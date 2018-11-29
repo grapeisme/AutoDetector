@@ -64,6 +64,9 @@ class Detector:
         except urllib2.URLError, e:
             out = "URLError, code:%s, error:%s" % (e.code, e.read())
             return False, out
+        except Exception as e:
+            out = "Exception, error:%s" % (e.args)
+            return False, out
 
         return True, out 
 
