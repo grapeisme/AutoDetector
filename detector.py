@@ -58,12 +58,12 @@ class Detector:
         try:
             response = urllib2.urlopen(request)
             out = response.read()
-        except urllib2.HTTPError, e: 
-            out = "HTTPError, code:%s" % e.code
-            return False, out
-        except urllib2.URLError, e:
-            out = "URLError, code:%s, error:%s" % (e.code, e.read())
-            return False, out
+        #except urllib2.HTTPError, e: 
+        #    out = "HTTPError, code:%s" % e.code
+        #    return False, out
+        #except urllib2.URLError, e:
+        #    out = "URLError, code:%s, error:%s" % (e.code, e.read())
+        #    return False, out
         except Exception as e:
             out = "Exception, error:%s" % (e.args)
             return False, out
