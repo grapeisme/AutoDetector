@@ -65,7 +65,7 @@ class Detector:
         #    out = "URLError, code:%s, error:%s" % (e.code, e.read())
         #    return False, out
         except Exception as e:
-            out = "Exception, error:%s" % (e.args)
+            out = "Exception, error:%s" % (e)
             return False, out
 
         return True, out 
@@ -77,6 +77,15 @@ class Detector:
         headers_flag = {}
         for k in self.cand_headers.keys():
             headers_flag[k] = 1
+
+        # run all first
+        res, out = self.http_get(self.cand_headers)
+        if not res:
+            wlog("HTTP_GET failed, try_withall, error:%s" % (out) )
+            pass
+        if not self.is_content_ok(out):
+            wlog("CONTENT_NOT_OK, try_withall")
+            pass 
 
         has_ok = False
         for k in headers_flag.keys():
